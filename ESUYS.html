@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' https://static.balsamiq.com/prototype/v1/; style-src 'unsafe-inline' https://static.balsamiq.com/prototype/v1/; font-src https://static.balsamiq.com/prototype/v1/; img-src data: https:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none';"/>
+    <title>Sipariş ve Üretim Takip Sistemi</title>
+
+    <!-- Fonts -->
+    <link href="https://static.balsamiq.com/prototype/v1/css/noto-fonts.css" rel="stylesheet"/>
+    <link href="https://static.balsamiq.com/prototype/v1/css/material-symbols-outlined.css" rel="stylesheet"/>
+
+    <!-- Tailwind CSS -->
+    <script src="https://static.balsamiq.com/prototype/v1/js/tailwindcss-3.4.17.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#007bff",
+                        "secondary": "#16a34a",
+                        "background": "#f0f0f0",
+                        "surface": "#ffffff",
+                        "border": "#dddddd",
+                        "text-main": "#333333",
+                        "text-muted": "#6c757d",
+                    },
+                    borderRadius: {
+                        "theme": "0.25rem",
+                        "theme-sm": "calc(0.25rem * 0.5)",
+                        "theme-lg": "calc(0.25rem * 1.5)",
+                    },
+                    boxShadow: {
+                        "theme": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "sans": ["Noto Sans", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- Alpine.js Plugins -->
+    <script defer src="https://static.balsamiq.com/prototype/v1/js/alpinejs-collapse-3.14.9.min.js"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://static.balsamiq.com/prototype/v1/js/alpinejs-3.14.9.min.js"></script>
+
+    <style>
+        /* Prevent flash of unstyled content */
+        [x-cloak] { display: none !important; }
+        .font-display { font-family: 'Noto Serif', serif; }
+        .font-body { font-family: 'Noto Sans', sans-serif; }
+    </style>
+
+</head>
+<body class="bg-slate-950 text-text-main font-body antialiased min-h-screen flex items-center justify-center p-2 sm:p-6"
+    x-data="{ page: 'main', formData: {} }">
+
+    <!-- Mobil Cihaz Çerçevesi -->
+    <div class="w-full max-w-[414px] h-[850px] sm:h-[896px] rounded-[36px] border-[8px] border-slate-800 shadow-2xl bg-background flex flex-col relative overflow-hidden">
+
+<!-- Page: Yeni Sipariş (Main) -->
+<div x-show="page === 'main'" x-cloak class="flex flex-col h-full bg-background relative">
+    <!-- Header -->
+    <div data-control-id="358" class="bg-[#333333] text-white px-4 py-4 flex items-center gap-3 shadow-theme shrink-0">
+        <span class="material-symbols-outlined cursor-pointer">menu</span>
+        <h1 class="text-xl font-medium">Yeni Sipariş</h1>
+    </div>
+
+    <!-- Form Content -->
+    <div class="flex-1 px-4 py-6 space-y-4 overflow-y-auto pb-24">
+        <div class="space-y-1">
+            <p data-control-id="359" class="text-sm font-medium text-text-main">Müşteri Seçimi</p>
+            <select data-control-id="360" x-model="formData['360']" class="border border-border rounded-theme px-3 py-3 w-full bg-surface focus:ring-2 focus:ring-primary outline-none">
+                <option value="">Seçiniz</option>
+                <option value="Müşteri 1">Müşteri 1</option>
+                <option value="Müşteri 2">Müşteri 2</option>
+            </select>
+        </div>
+
+        <div class="space-y-1">
+            <p data-control-id="361" class="text-sm font-medium text-text-main">Ürün Seçimi</p>
+            <select data-control-id="362" x-model="formData['362']" class="border border-border rounded-theme px-3 py-3 w-full bg-surface focus:ring-2 focus:ring-primary outline-none">
+                <option value="">Seçiniz</option>
+                <option value="Ürün A">Ürün A</option>
+                <option value="Ürün B">Ürün B</option>
+            </select>
+        </div>
+
+        <div class="space-y-1">
+            <p data-control-id="363" class="text-sm font-medium text-text-main">Miktar</p>
+            <input data-control-id="364" type="text" x-model="formData['364']" placeholder="Miktar Giriniz" class="border border-border rounded-theme px-3 py-3 w-full bg-surface focus:ring-2 focus:ring-primary outline-none">
+        </div>
+
+        <div class="space-y-1">
+            <p data-control-id="365" class="text-sm font-medium text-text-main">Toplam Tutar</p>
+            <input data-control-id="366" type="text" x-model="formData['366']" placeholder="0.00 TL" class="border border-border rounded-theme px-3 py-3 w-full bg-[#e9e9e9] text-text-muted outline-none" readonly>
+        </div>
+
+        <button data-control-id="367" @click="page = 'production'" class="bg-[#6c757d] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full font-medium transition-all active:scale-[0.98]">
+            Listeye Ekle
+        </button>
+    </div>
+
+    <!-- Bottom Action -->
+    <div data-control-id="368" class="absolute bottom-14 left-0 right-0 p-4 bg-surface border-t border-border z-10">
+        <button data-control-id="369" @click="page = 'production'" class="bg-[#007bff] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full text-lg font-semibold transition-all active:scale-[0.98]">
+            Siparişi Onayla
+        </button>
+    </div>
+
+    <!-- Bottom Nav Placeholder -->
+    <div class="absolute bottom-0 left-0 right-0 bg-surface border-t border-border flex justify-around py-3 z-20">
+        <button @click="page = 'main'" :class="page === 'main' ? 'text-primary' : 'text-text-muted'" class="flex flex-col items-center">
+            <span class="material-symbols-outlined">add_circle</span>
+            <span class="text-[10px]">Yeni</span>
+        </button>
+        <button @click="page = 'production'" :class="page === 'production' ? 'text-primary' : 'text-text-muted'" class="flex flex-col items-center">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-[10px]">Pano</span>
+        </button>
+        <button @click="page = 'invoices'" :class="page === 'invoices' ? 'text-primary' : 'text-text-muted'" class="flex flex-col items-center">
+            <span class="material-symbols-outlined">receipt</span>
+            <span class="text-[10px]">Fatura</span>
+        </button>
+    </div>
+</div>
+
+<!-- Page: Üretim Panosu -->
+<div x-show="page === 'production'" x-cloak class="flex flex-col h-full bg-background relative">
+    <!-- Header -->
+    <div data-control-id="443" class="bg-[#333333] text-white px-4 py-4 flex items-center justify-between shadow-theme shrink-0">
+        <h1 class="text-xl font-medium">Üretim Panosu</h1>
+        <button @click="page = 'main'" class="material-symbols-outlined">add</button>
+    </div>
+
+    <div class="flex-1 px-4 py-4 space-y-6 overflow-y-auto pb-20">
+        <!-- Section: Üretim Bekliyor -->
+        <div data-control-id="444" class="space-y-3">
+            <h2 data-control-id="445" class="text-lg font-bold text-text-main flex items-center gap-2">
+                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> Üretim Bekliyor
+            </h2>
+            
+            <!-- Card 1 -->
+            <div data-control-id="446" class="bg-surface rounded-theme-lg shadow-theme border border-border p-4 space-y-2">
+                <p data-control-id="447" class="text-sm text-text-main"><strong>Sipariş No:</strong> 1001</p>
+                <p data-control-id="448" class="text-sm text-text-main"><strong>Müşteri:</strong> ABC A.Ş.</p>
+                <p data-control-id="449" class="text-sm text-text-main"><strong>Ürün:</strong> Ürün A</p>
+                <p data-control-id="450" class="text-sm text-text-main"><strong>Miktar:</strong> 100</p>
+                <button data-control-id="451" class="bg-[#007bff] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full mt-2 text-sm font-medium">
+                    İşleme Al
+                </button>
+            </div>
+
+            <!-- Card 2 -->
+            <div data-control-id="452" class="bg-surface rounded-theme-lg shadow-theme border border-border p-4 space-y-2">
+                <p data-control-id="453" class="text-sm text-text-main"><strong>Sipariş No:</strong> 1002</p>
+                <p data-control-id="454" class="text-sm text-text-main"><strong>Müşteri:</strong> XYZ Ltd.</p>
+                <p data-control-id="455" class="text-sm text-text-main"><strong>Ürün:</strong> Ürün B</p>
+                <p data-control-id="456" class="text-sm text-text-main"><strong>Miktar:</strong> 50</p>
+                <button data-control-id="457" class="bg-[#007bff] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full mt-2 text-sm font-medium">
+                    İşleme Al
+                </button>
+            </div>
+        </div>
+
+        <!-- Section: Bantta (Üretimde) -->
+        <div data-control-id="458" class="space-y-3">
+            <h2 data-control-id="459" class="text-lg font-bold text-text-main flex items-center gap-2">
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Bantta (Üretimde)
+            </h2>
+            <div data-control-id="460" class="bg-surface rounded-theme-lg shadow-theme border border-border p-4 space-y-2">
+                <p data-control-id="461" class="text-sm text-text-main"><strong>Sipariş No:</strong> 1003</p>
+                <p data-control-id="462" class="text-sm text-text-main"><strong>Müşteri:</strong> DEF Ticaret</p>
+                <p data-control-id="463" class="text-sm text-text-main"><strong>Ürün:</strong> Ürün C</p>
+                <p data-control-id="464" class="text-sm text-text-main"><strong>Miktar:</strong> 200</p>
+                <button data-control-id="465" class="bg-[#007bff] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full mt-2 text-sm font-medium">
+                    Üretimi Tamamla
+                </button>
+            </div>
+        </div>
+
+        <!-- Section: Sevkiyata Hazır -->
+        <div data-control-id="466" class="space-y-3">
+            <h2 data-control-id="467" class="text-lg font-bold text-text-main flex items-center gap-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span> Sevkiyata Hazır
+            </h2>
+            <div data-control-id="468" class="bg-surface rounded-theme-lg shadow-theme border border-border p-4 space-y-2">
+                <p data-control-id="469" class="text-sm text-text-main"><strong>Sipariş No:</strong> 1004</p>
+                <p data-control-id="470" class="text-sm text-text-main"><strong>Müşteri:</strong> GHI Pazarlama</p>
+                <p data-control-id="471" class="text-sm text-text-main"><strong>Ürün:</strong> Ürün D</p>
+                <p data-control-id="472" class="text-sm text-text-main"><strong>Miktar:</strong> 75</p>
+                <button @click="page = 'invoices'" class="bg-green-600 text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full mt-2 text-sm font-medium">
+                    Fatura Ekranına Git
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Nav Placeholder -->
+    <div class="absolute bottom-0 left-0 right-0 bg-surface border-t border-border flex justify-around py-3 z-20">
+        <button @click="page = 'main'" class="flex flex-col items-center text-text-muted">
+            <span class="material-symbols-outlined">add_circle</span>
+            <span class="text-[10px]">Yeni</span>
+        </button>
+        <button @click="page = 'production'" class="flex flex-col items-center text-primary">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-[10px]">Pano</span>
+        </button>
+        <button @click="page = 'invoices'" class="flex flex-col items-center text-text-muted">
+            <span class="material-symbols-outlined">receipt</span>
+            <span class="text-[10px]">Fatura</span>
+        </button>
+    </div>
+</div>
+
+<!-- Page: Fatura Onay Listesi -->
+<div x-show="page === 'invoices'" x-cloak class="flex flex-col h-full bg-background relative">
+    <!-- Header -->
+    <div data-control-id="474" class="bg-[#333333] text-white px-4 py-4 flex items-center gap-3 shadow-theme shrink-0">
+        <button @click="page = 'production'" class="material-symbols-outlined">arrow_back</button>
+        <h1 class="text-lg font-medium">Fatura Onay Listesi</h1>
+    </div>
+
+    <!-- Filters -->
+    <div class="px-4 py-4 space-y-3 shrink-0">
+        <div class="relative">
+            <input data-control-id="475" type="text" x-model="formData['475']" placeholder="Sipariş veya Müşteri Ara..." class="border border-border rounded-theme px-3 py-3 w-full bg-surface outline-none focus:ring-2 focus:ring-primary">
+            <span class="material-symbols-outlined absolute right-3 top-3 text-text-muted">search</span>
+        </div>
+        <div class="relative">
+            <input data-control-id="498" type="text" x-model="formData['498']" placeholder="Tarih Seçin" class="border border-border rounded-theme px-3 py-3 w-full bg-surface outline-none focus:ring-2 focus:ring-primary">
+            <span data-control-id="499" class="material-symbols-outlined absolute right-3 top-3 text-text-muted">calendar_today</span>
+        </div>
+        <button data-control-id="476" class="bg-[#2563eb] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full font-medium">
+            Toplu Fatura Kes
+        </button>
+    </div>
+
+    <!-- Invoice List -->
+    <div class="flex-1 px-4 space-y-4 overflow-y-auto pb-20">
+        <!-- Invoice Card 1 -->
+        <div data-control-id="477" class="bg-surface rounded-theme-lg shadow-theme border border-border p-4 space-y-1">
+            <p data-control-id="478" class="text-sm text-text-main"><strong>Sipariş No:</strong> SO-001</p>
+            <p data-control-id="479" class="text-sm text-text-main"><strong>Tarih:</strong> 2023-10-26</p>
+            <p data-control-id="480" class="text-sm text-text-main"><strong>Müşteri Unvanı:</strong> ABC Şirketi</p>
+            <p data-control-id="481" class="text-sm text-text-main"><strong>Vergi No:</strong> 1234567890</p>
+            <p data-control-id="482" class="text-sm text-text-main"><strong>Toplam Tutar:</strong> 1500.00 TL</p>
+            <button data-control-id="483" class="bg-[#16a34a] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full mt-3 text-sm font-medium">
+                Fatura Oluştur
+            </button>
+        </div>
+
+        <!-- Invoice Card 2 -->
+        <div data-control-id="484" class="bg-surface rounded-theme-lg shadow-theme border border-border p-4 space-y-1">
+            <p data-control-id="485" class="text-sm text-text-main"><strong>Sipariş No:</strong> SO-002</p>
+            <p data-control-id="486" class="text-sm text-text-main"><strong>Tarih:</strong> 2023-10-26</p>
+            <p data-control-id="487" class="text-sm text-text-main"><strong>Müşteri Unvanı:</strong> XYZ Ltd.</p>
+            <p data-control-id="488" class="text-sm text-text-main"><strong>Vergi No:</strong> 0987654321</p>
+            <p data-control-id="489" class="text-sm text-text-main"><strong>Toplam Tutar:</strong> 2350.50 TL</p>
+            <button data-control-id="490" class="bg-[#16a34a] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full mt-3 text-sm font-medium">
+                Fatura Oluştur
+            </button>
+        </div>
+
+        <!-- Invoice Card 3 -->
+        <div data-control-id="491" class="bg-surface rounded-theme-lg shadow-theme border border-border p-4 space-y-1">
+            <p data-control-id="492" class="text-sm text-text-main"><strong>Sipariş No:</strong> SO-003</p>
+            <p data-control-id="493" class="text-sm text-text-main"><strong>Tarih:</strong> 2023-10-25</p>
+            <p data-control-id="494" class="text-sm text-text-main"><strong>Müşteri Unvanı:</strong> Deneme A.Ş.</p>
+            <p data-control-id="495" class="text-sm text-text-main"><strong>Vergi No:</strong> 1122334455</p>
+            <p data-control-id="496" class="text-sm text-text-main"><strong>Toplam Tutar:</strong> 750.00 TL</p>
+            <button data-control-id="497" class="bg-[#16a34a] text-white px-4 py-3 rounded-theme shadow-theme hover:opacity-90 w-full mt-3 text-sm font-medium">
+                Fatura Oluştur
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Nav Placeholder -->
+    <div class="absolute bottom-0 left-0 right-0 bg-surface border-t border-border flex justify-around py-3 z-20">
+        <button @click="page = 'main'" class="flex flex-col items-center text-text-muted">
+            <span class="material-symbols-outlined">add_circle</span>
+            <span class="text-[10px]">Yeni</span>
+        </button>
+        <button @click="page = 'production'" class="flex flex-col items-center text-text-muted">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-[10px]">Pano</span>
+        </button>
+        <button @click="page = 'invoices'" class="flex flex-col items-center text-primary">
+            <span class="material-symbols-outlined">receipt</span>
+            <span class="text-[10px]">Fatura</span>
+        </button>
+    </div>
+</div>
+
+    </div>
+</body>
+</html>
